@@ -357,12 +357,12 @@ display: none;
 </div>
 
 
-<div id="loading-library-and-dataset-preparation" class="section level2">
-<h2>Loading Library and Dataset Preparation</h2>
-<pre class="r"><code>#install tidyverse if not available 
-#install.packages(&quot;tidyverse&quot;)
-
-#load library
+<div id="highlights-of-the-dataset" class="section level2">
+<h2>Highlights of the Dataset</h2>
+<p>This is an Airline Dataset having 227,496 flight information of an
+USAirport in the year 2011. There is total 21 columns in the dataset.
+Below is the brief of the columns.</p>
+<pre class="r"><code>#load library
 library(tidyverse)</code></pre>
 <pre><code>## Warning: package &#39;tidyverse&#39; was built under R version 4.3.3</code></pre>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
@@ -376,10 +376,80 @@ library(tidyverse)</code></pre>
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 <pre class="r"><code>#load csv from github(uploaded for Assignment_02_Group_04)
-airline &lt;- read.csv(&quot;https://raw.githubusercontent.com/shakibed/CBD501_Assignment_02_Group_04/main/dataset.csv&quot;, stringsAsFactors = FALSE)
+airline &lt;- read.csv(&quot;https://raw.githubusercontent.com/maeshakib/Airline-Data-Analysis-R/main/dataset.csv&quot;, stringsAsFactors = FALSE)
+#show data structure of dataset
+str(airline)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    227496 obs. of  21 variables:
+##  $ Year             : int  2011 2011 2011 2011 2011 2011 2011 2011 2011 2011 ...
+##  $ Month            : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ DayofMonth       : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ DayOfWeek        : int  6 7 1 2 3 4 5 6 7 1 ...
+##  $ DepTime          : int  1400 1401 1352 1403 1405 1359 1359 1355 1443 1443 ...
+##  $ ArrTime          : int  1500 1501 1502 1513 1507 1503 1509 1454 1554 1553 ...
+##  $ UniqueCarrier    : chr  &quot;AA&quot; &quot;AA&quot; &quot;AA&quot; &quot;AA&quot; ...
+##  $ FlightNum        : int  428 428 428 428 428 428 428 428 428 428 ...
+##  $ TailNum          : chr  &quot;N576AA&quot; &quot;N557AA&quot; &quot;N541AA&quot; &quot;N403AA&quot; ...
+##  $ ActualElapsedTime: int  60 60 70 70 62 64 70 59 71 70 ...
+##  $ AirTime          : int  40 45 48 39 44 45 43 40 41 45 ...
+##  $ ArrDelay         : int  -10 -9 -8 3 -3 -7 -1 -16 44 43 ...
+##  $ DepDelay         : int  0 1 -8 3 5 -1 -1 -5 43 43 ...
+##  $ Origin           : chr  &quot;IAH&quot; &quot;IAH&quot; &quot;IAH&quot; &quot;IAH&quot; ...
+##  $ Dest             : chr  &quot;DFW&quot; &quot;DFW&quot; &quot;DFW&quot; &quot;DFW&quot; ...
+##  $ Distance         : int  224 224 224 224 224 224 224 224 224 224 ...
+##  $ TaxiIn           : int  7 6 5 9 9 6 12 7 8 6 ...
+##  $ TaxiOut          : int  13 9 17 22 9 13 15 12 22 19 ...
+##  $ Cancelled        : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ CancellationCode : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ Diverted         : int  0 0 0 0 0 0 0 0 0 0 ...</code></pre>
+</div>
+<div id="loading-library-and-dataset-preparation" class="section level2">
+<h2>Loading Library and Dataset Preparation</h2>
+<pre class="r"><code>#install tidyverse if not available 
+#install.packages(&quot;tidyverse&quot;)
+
 
 #summary of data set
-#View(airline)</code></pre>
+summary(airline)</code></pre>
+<pre><code>##       Year          Month          DayofMonth      DayOfWeek        DepTime    
+##  Min.   :2011   Min.   : 1.000   Min.   : 1.00   Min.   :1.000   Min.   :   1  
+##  1st Qu.:2011   1st Qu.: 4.000   1st Qu.: 8.00   1st Qu.:2.000   1st Qu.:1021  
+##  Median :2011   Median : 7.000   Median :16.00   Median :4.000   Median :1416  
+##  Mean   :2011   Mean   : 6.514   Mean   :15.74   Mean   :3.948   Mean   :1396  
+##  3rd Qu.:2011   3rd Qu.: 9.000   3rd Qu.:23.00   3rd Qu.:6.000   3rd Qu.:1801  
+##  Max.   :2011   Max.   :12.000   Max.   :31.00   Max.   :7.000   Max.   :2400  
+##                                                                  NA&#39;s   :2905  
+##     ArrTime     UniqueCarrier        FlightNum      TailNum         
+##  Min.   :   1   Length:227496      Min.   :   1   Length:227496     
+##  1st Qu.:1215   Class :character   1st Qu.: 855   Class :character  
+##  Median :1617   Mode  :character   Median :1696   Mode  :character  
+##  Mean   :1578                      Mean   :1962                     
+##  3rd Qu.:1953                      3rd Qu.:2755                     
+##  Max.   :2400                      Max.   :7290                     
+##  NA&#39;s   :3066                                                       
+##  ActualElapsedTime    AirTime         ArrDelay          DepDelay      
+##  Min.   : 34.0     Min.   : 11.0   Min.   :-70.000   Min.   :-33.000  
+##  1st Qu.: 77.0     1st Qu.: 58.0   1st Qu.: -8.000   1st Qu.: -3.000  
+##  Median :128.0     Median :107.0   Median :  0.000   Median :  0.000  
+##  Mean   :129.3     Mean   :108.1   Mean   :  7.094   Mean   :  9.445  
+##  3rd Qu.:165.0     3rd Qu.:141.0   3rd Qu.: 11.000   3rd Qu.:  9.000  
+##  Max.   :575.0     Max.   :549.0   Max.   :978.000   Max.   :981.000  
+##  NA&#39;s   :3622      NA&#39;s   :3622    NA&#39;s   :3622      NA&#39;s   :2905     
+##     Origin              Dest              Distance          TaxiIn       
+##  Length:227496      Length:227496      Min.   :  79.0   Min.   :  1.000  
+##  Class :character   Class :character   1st Qu.: 376.0   1st Qu.:  4.000  
+##  Mode  :character   Mode  :character   Median : 809.0   Median :  5.000  
+##                                        Mean   : 787.8   Mean   :  6.099  
+##                                        3rd Qu.:1042.0   3rd Qu.:  7.000  
+##                                        Max.   :3904.0   Max.   :165.000  
+##                                                         NA&#39;s   :3066     
+##     TaxiOut         Cancelled       CancellationCode      Diverted       
+##  Min.   :  1.00   Min.   :0.00000   Length:227496      Min.   :0.000000  
+##  1st Qu.: 10.00   1st Qu.:0.00000   Class :character   1st Qu.:0.000000  
+##  Median : 14.00   Median :0.00000   Mode  :character   Median :0.000000  
+##  Mean   : 15.09   Mean   :0.01307                      Mean   :0.002853  
+##  3rd Qu.: 18.00   3rd Qu.:0.00000                      3rd Qu.:0.000000  
+##  Max.   :163.00   Max.   :1.00000                      Max.   :1.000000  
+##  NA&#39;s   :2947</code></pre>
 </div>
 <div id="question-1" class="section level2">
 <h2>Question 1:</h2>

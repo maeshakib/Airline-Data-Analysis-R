@@ -3,13 +3,24 @@ title: "Airline"
 author: "Shakib"
 date: "2024-07-06"
 output: html_document
-dir:docs
+
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Highlights of the Dataset
+This is an Airline Dataset having 227,496 flight information of an USAirport in the year 2011. There is total 21 columns in the dataset. Below is the brief of the columns.
+
+```{r}
+#load library
+library(tidyverse)
+#load csv from github(uploaded for Assignment_02_Group_04)
+airline <- read.csv("https://raw.githubusercontent.com/maeshakib/Airline-Data-Analysis-R/main/dataset.csv", stringsAsFactors = FALSE)
+#show data structure of dataset
+str(airline)
+```
 
 ## Loading Library and Dataset Preparation
 
@@ -18,13 +29,9 @@ knitr::opts_chunk$set(echo = TRUE)
 #install tidyverse if not available 
 #install.packages("tidyverse")
 
-#load library
-library(tidyverse)
-#load csv from github(uploaded for Assignment_02_Group_04)
-airline <- read.csv("https://raw.githubusercontent.com/shakibed/CBD501_Assignment_02_Group_04/main/dataset.csv", stringsAsFactors = FALSE)
 
 #summary of data set
-#View(airline)
+summary(airline)
 ```
 
 ## Question 1:
